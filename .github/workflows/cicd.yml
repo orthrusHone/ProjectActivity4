@@ -72,8 +72,8 @@ jobs:
       - name: Upload Executable
         uses: actions/upload-artifact@v3
         with:
-          name: ip_info_app
-          path: dist/ip_info_app.exe
+          name: project_activity3
+          path: dist/project_activity3.exe
 
       # # Step 6: Deploy (Optional)
       # # If you want to deploy to a server or release it on GitHub
