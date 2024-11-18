@@ -72,18 +72,19 @@ jobs:
       - name: Upload Executable
         uses: actions/upload-artifact@v3
         with:
-          name: project_activity3
+          name: project_activity3_executable
           path: dist/project_activity3.exe
 
-      # # Step 6: Deploy (Optional)
-      # # If you want to deploy to a server or release it on GitHub
+      # Step 6: Create GitHub Release (Optional)
+      # Uncomment the following lines if you want to create a release automatically
+
       # - name: Create GitHub Release
       #   uses: actions/create-release@v1
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #   with:
       #     tag_name: v1.0.0
-      #     release_name: "IP Information App v1.0.0"
+      #     release_name: "Project Activity 3 v1.0.0"
       #     draft: false
       #     prerelease: false
 
@@ -91,6 +92,6 @@ jobs:
       #   uses: actions/upload-release-asset@v1
       #   with:
       #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: dist/ip_info_app.exe
-      #     asset_name: ip_info_app.exe
+      #     asset_path: dist/project_activity3.exe
+      #     asset_name: project_activity3.exe
       #     asset_content_type: application/octet-stream
