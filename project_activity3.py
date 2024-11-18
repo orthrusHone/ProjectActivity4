@@ -1,23 +1,24 @@
 import requests
-import json
 import os
 import tkinter as tk
 from tkinter import messagebox
 
+
 def get_public_ip_info():
+    """
+    Retrieves public IP information using the IPStack API.
 
+    Returns:
+        str: A formatted string containing IP information or an error message.
+    """
     api_key = os.getenv("API_KEY", "e45e222a65e81fab96f9886ebf842a7c")
-    
     url = f"http://api.ipstack.com/check?access_key={api_key}"
-    
+
     try:
-
         response = requests.get(url)
-        
         if response.status_code == 200:
-
             data = response.json()
-            
+
             ip_address = data.get('ip')
             city = data.get('city')
             region = data.get('region_name')
@@ -39,29 +40,50 @@ def get_public_ip_info():
                 f"ASN (Autonomous System Number): {asn}\n"
                 f"ISP: {isp}"
             )
-            
+
             return ip_info
 
         else:
             return f"Failed to retrieve IP info. Status code: {response.status_code}"
-    
+
     except requests.exceptions.RequestException as e:
         return f"Error occurred while retrieving IP information: {e}"
 
 
 def display_ip_info():
+    """
+    Displays the public IP information in a message box.
+    """
     ip_info = get_public_ip_info()
     messagebox.showinfo("Public IP Information", ip_info)
 
-root = tk.Tk()
-root.title("IP Information App")
 
-root.geometry("400x200")
+def main():
+    """
+    Creates the main GUI application for retrieving public IP information.
+    """
+    root = tk.Tk()
+    root.title("IP Information App")
+    root.geometry("400x200")
 
-label = tk.Label(root, text="Click the button to retrieve your public IP information", wraplength=300)
-label.pack(pady=20)
+    label = tk.Label(
+        root,
+        text="Click the button to retrieve your public IP information",
+        wraplength=300
+    )
+    label.pack(pady=20)
 
-fetch_button = tk.Button(root, text="Get IP Info", command=display_ip_info, height=2, width=20)
-fetch_button.pack(pady=10)
+    fetch_button = tk.Button(
+        root,
+        text="Get IP Info",
+        command=display_ip_info,
+        height=2,
+        width=20
+    )
+    fetch_button.pack(pady=10)
 
-root.mainloop()
+    root.mainloop()
+
+
+if __name__ == "__main__":
+    main()
